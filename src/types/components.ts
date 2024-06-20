@@ -23,4 +23,5 @@ export interface IBottomSheetProps {
   isVisible: boolean;
   product: {title: string; id: string};
   onClose: () => void;
+  navigation: any;
 }
