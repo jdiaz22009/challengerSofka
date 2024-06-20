@@ -194,7 +194,7 @@ export const AddProductScreen = ({navigation, route}: Props) => {
             )}
 
             <View style={styles.space3} />
-            <Text style={styles.textInput}>Descripcion</Text>
+            <Text style={styles.textInput}>Descripción</Text>
             <View style={styles.space3} />
             <Input
               styleInput={[
@@ -232,7 +232,7 @@ export const AddProductScreen = ({navigation, route}: Props) => {
             )}
 
             <View style={styles.space3} />
-            <Text style={styles.textInput}>Fecha Liberacion</Text>
+            <Text style={styles.textInput}>Fecha Liberación</Text>
             <View style={styles.space3} />
             <Input
               styleInput={[
@@ -251,7 +251,7 @@ export const AddProductScreen = ({navigation, route}: Props) => {
             )}
 
             <View style={styles.space3} />
-            <Text style={styles.textInput}>Fecha Revision</Text>
+            <Text style={styles.textInput}>Fecha revisión</Text>
             <View style={styles.space3} />
             <Input
               styleInput={[

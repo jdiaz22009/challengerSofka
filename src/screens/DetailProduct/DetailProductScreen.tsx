@@ -41,7 +41,7 @@ export const DetailProductScreen = ({navigation, route}: Props) => {
 
       <View style={styles.containerSumary}>
         <Text style={styles.textId}>ID: {product?.id}</Text>
-        <Text style={styles.textInformation}>Informacion extra</Text>
+        <Text style={styles.textInformation}>Información extra</Text>
 
         <View style={styles.space} />
 
@@ -53,7 +53,7 @@ export const DetailProductScreen = ({navigation, route}: Props) => {
         <View style={styles.spaceaData} />
 
         <View style={styles.rowData}>
-          <Text>Descripcion </Text>
+          <Text>Descripción </Text>
           <Text style={styles.bold}>{product?.description}</Text>
         </View>
 
@@ -77,14 +77,14 @@ export const DetailProductScreen = ({navigation, route}: Props) => {
         <View style={styles.spaceaData} />
 
         <View style={styles.rowData}>
-          <Text>Fecha liberacion </Text>
+          <Text>Fecha Liberación </Text>
           <Text style={styles.bold}>{product?.date_release}</Text>
         </View>
 
         <View style={styles.spaceaData} />
 
         <View style={styles.rowData}>
-          <Text>Fecha revision </Text>
+          <Text>Fecha revisión </Text>
           <Text style={styles.bold}>{product?.date_revision}</Text>
         </View>
       </View>
