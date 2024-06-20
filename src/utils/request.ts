@@ -7,7 +7,7 @@ import axios, {
 import {API_URL, AXIOS_TIMEOUT} from './config';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://851c-2800-e2-4f80-5b3-f902-997a-9369-81b3.ngrok-free.app/',
+  baseURL: API_URL,
 });
 axiosInstance.defaults.timeout = AXIOS_TIMEOUT;
 
