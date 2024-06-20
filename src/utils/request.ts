@@ -7,7 +7,7 @@ import axios, {
 import {API_URL, AXIOS_TIMEOUT} from './config';
 
 const axiosInstance = axios.create({
-  baseURL: API_URL,
+  baseURL: 'https://851c-2800-e2-4f80-5b3-f902-997a-9369-81b3.ngrok-free.app/',
 });
 axiosInstance.defaults.timeout = AXIOS_TIMEOUT;
 
@@ -50,10 +50,12 @@ export const request = async <D, R>(
     };
 
     console.log('axios options', options);
+    console.log('Baser url ', API_URL);
     const response: AxiosResponse<R> = await axiosInstance.request<
       D,
       AxiosResponse<R>
     >(options);
+    console.log(response.data, 'data');
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {

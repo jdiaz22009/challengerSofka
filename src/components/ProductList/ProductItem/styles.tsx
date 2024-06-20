@@ -1,4 +1,4 @@
-import {GRAY_100} from '@/themes';
+import {GRAY, GRAY_100} from '@/themes';
 import {Dimensions, StyleSheet} from 'react-native';
 
 const {width} = Dimensions.get('window');
@@ -39,6 +39,6 @@ export default StyleSheet.create({
   },
   id: {
     fontSize: 14,
-    color: GRAY_100,
+    color: GRAY,
   },
 });

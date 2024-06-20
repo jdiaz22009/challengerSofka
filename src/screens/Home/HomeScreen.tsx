@@ -41,7 +41,7 @@ export const HomeScreen = ({navigation}: Props) => {
   }, [searchTerm, products]);
 
   const handlerNavigation = () => {
-    navigation.push('AddProductScreen');
+    navigation.push('AddProductScreen', {type: 'register'});
   };
 
   const handlerGetProduct = async () => {

@@ -1,6 +1,7 @@
 export * from './shared/Input/Input';
 export * from './shared/Header/Header';
 export * from './shared/Buttons/Buttons';
+export * from './shared/ButtomSheet/ButtonSheet';
 export * from './shared/Loader/Loader';
 export * from './shared/Skeleton/Skeleton';
 

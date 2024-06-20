@@ -1,8 +1,12 @@
+import {IProduct} from '@/types/app';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 
 export type RootStackParams = {
   HomeScreen: undefined;
-  AddProductScreen: undefined;
+  AddProductScreen: {
+    product?: IProduct | null;
+    type: 'register' | 'update';
+  };
   DetailProductScreen: {
     id: string;
   };

@@ -12,30 +12,48 @@ import {
   isValid,
   parse,
 } from 'date-fns';
+import {StackScreenProps} from '@react-navigation/stack';
+import {RootStackParams} from '@/routes/params.stack';
 
 import {Button, Header, Input} from '@/components/components';
-import {addProduct} from '@/services/product';
-import {IProduct} from '@/types/app';
 import Loader from '@/components/shared/Loader/Loader';
+import {addProduct, updateProduct} from '@/services/product';
+import {IProduct} from '@/types/app';
 import styles from './styles';
+import {parsedate} from '@/utils';
 
-const initialValues: IProduct = {
-  id: '',
-  name: '',
-  logo: '',
-  description: '',
-  date_release: format(new Date(), 'dd/MM/yyyy'),
-  date_revision: '',
-};
+interface Props extends StackScreenProps<RootStackParams, 'AddProductScreen'> {}
 
-export const AddProductScreen = () => {
+export const AddProductScreen = ({navigation, route}: Props) => {
+  const {type, product} = route.params;
   const [showLoader, setShowLoader] = useState<boolean>(false);
 
+  const initialValues: IProduct = {
+    id: type === 'register' ? '' : product?.id ?? '',
+    name: type === 'register' ? '' : product?.name ?? '',
+    logo: type === 'register' ? '' : product?.logo ?? '',
+    description: type === 'register' ? '' : product?.description ?? '',
+    date_release:
+      type === 'register'
+        ? format(new Date(), 'dd/MM/yyyy')
+        : format(new Date(product?.date_release), 'dd/MM/yyyy') ?? '',
+    date_revision: type === 'register' ? '' : product?.date_revision ?? '',
+  };
+
   const FormSchema = Yup.object().shape({
-    id: Yup.string().required('Id no valido'),
-    name: Yup.string().required('Este campo es requerido'),
+    id: Yup.string()
+      .required('Id no valido')
+      .min(3, 'mínimo 3 caracteres')
+      .max(10, 'maximo 10'),
+    name: Yup.string()
+      .required('Este campo es requerido')
+      .min(3, 'mínimo 3 caracteres')
+      .max(100, 'maximo 100'),
     logo: Yup.string().required('Este campo es requerido'),
-    description: Yup.string().required('Este campo es requerido'),
+    description: Yup.string()
+      .required('Este campo es requerido')
+      .min(10, 'mínimo 10 caracteres')
+      .max(200, 'maximo 100'),
     date_release: Yup.string().required('Este campo es requerido'),
   });
 
@@ -52,11 +70,11 @@ export const AddProductScreen = () => {
     initialValues,
     validationSchema: FormSchema,
     onSubmit: (values: IProduct) => {
-      const parseDate = parse(values.date_release, 'dd/MM/yyyy', new Date());
+      console.log(values);
       console.log(values);
       handlerAdd({
         ...values,
-        date_release: format(parseDate, 'yyyy-MM-dd'),
+        date_release: parsedate(values.date_release),
       });
     },
   });
@@ -64,13 +82,29 @@ export const AddProductScreen = () => {
   const handlerAdd = async (data: IProduct) => {
     try {
       setShowLoader(true);
-      await addProduct(data);
+      await handlerTypeApi(data);
       Alert.alert('Se ha enviado con exito');
       setShowLoader(false);
       resetForm();
     } catch (error) {
       setShowLoader(false);
       console.error(error);
+    }
+  };
+
+  const handlerTypeApi = async (data: IProduct) => {
+    try {
+      if (type === 'register') {
+        await addProduct(data);
+        navigation.pop();
+      }
+
+      if (type === 'update') {
+        await updateProduct(data, product?.id ?? '');
+        navigation.replace('HomeScreen');
+      }
+    } catch (error) {
+      throw error;
     }
   };
 

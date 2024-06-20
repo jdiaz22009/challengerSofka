@@ -18,3 +18,9 @@ export interface IButtonProps {
   styleText?: StyleProp<TextStyle>;
   onPress?: () => void;
 }
+
+export interface IBottomSheetProps {
+  isVisible: boolean;
+  product: {title: string; id: string};
+  onClose: () => void;
+}

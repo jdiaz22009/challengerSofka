@@ -9,5 +9,3 @@
 5. npx react-native run-ios or run-android 
 
 
-
-
