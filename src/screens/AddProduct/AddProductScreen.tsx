@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  Alert,
-  Dimensions,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Alert, ScrollView, Text, View} from 'react-native';
 
 import {useFormik} from 'formik';
 import * as Yup from 'yup';

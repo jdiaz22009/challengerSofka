@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
-import {Dimensions, StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, View} from 'react-native';
 
 import {Header} from '@/components/components';
 import {geProducts} from '@/services/product';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '@/routes/params.stack';
 
-const {height, width} = Dimensions.get('window');
+const {height} = Dimensions.get('window');
 
 interface Props
   extends StackScreenProps<RootStackParams, 'DetailProductScreen'> {}
