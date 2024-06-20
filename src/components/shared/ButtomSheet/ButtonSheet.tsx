@@ -4,7 +4,7 @@ import styles from './styles';
 
 import {IBottomSheetProps} from '@/types/components';
 import {Button} from '@/components/components';
-import {deleteProductById} from '@/services/product';
+import {useData} from '@/context/DataContext';
 
 export const BottomSheet = ({
   isVisible,
@@ -12,9 +12,11 @@ export const BottomSheet = ({
   product,
   navigation,
 }: IBottomSheetProps) => {
+  const {removeData} = useData();
+
   const handlerDeleteProduct = async () => {
     try {
-      await deleteProductById(product.id);
+      await removeData(product.id);
       onClose();
       navigation.pop();
     } catch (error) {

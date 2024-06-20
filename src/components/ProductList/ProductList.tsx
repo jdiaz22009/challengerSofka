@@ -16,13 +16,13 @@ export const ProductList = ({
       renderItem={({item, index}) => (
         <ProductItem
           navigation={navigation}
-          name={item.name}
-          id={item?.id}
+          name={item?.name ?? ''}
+          id={item?.id ? item?.id : ''}
           isFirst={index === 0}
           isLast={index === data.length - 1}
         />
       )}
-      keyExtractor={item => item.id.toString()}
+      keyExtractor={item => (item?.id ? item.id.toString() : '')}
     />
   );
 };

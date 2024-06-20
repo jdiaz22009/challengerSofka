@@ -13,46 +13,32 @@ import {
 } from '@/components/components';
 import {geProducts} from '@/services/product';
 import {IProduct} from '@/types/app';
+import {useData} from '@/context/DataContext';
 
 interface Props extends StackScreenProps<RootStackParams, 'HomeScreen'> {}
 
 export const HomeScreen = ({navigation}: Props) => {
-  const [products, setProducts] = useState<IProduct[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
-  const [skeleton, setSkeleton] = useState<boolean>(false);
+  const {data} = useData();
 
-  useEffect(() => {
-    handlerGetProduct();
-  }, []);
+  const [filteredProducts, setFilteredProducts] = useState<IProduct[]>([]);
 
   useEffect(() => {
     if (searchTerm === '') {
-      setFilteredProducts(products);
+      setFilteredProducts(data);
     } else {
       const lowercasedFilter = searchTerm.toLowerCase();
-      const filteredData = products.filter(
+      const filteredData = data.filter(
         product =>
           product.name.toLowerCase().includes(lowercasedFilter) ||
           product.id.toLowerCase().includes(lowercasedFilter),
       );
       setFilteredProducts(filteredData);
     }
-  }, [searchTerm, products]);
+  }, [searchTerm, data]);
 
   const handlerNavigation = () => {
     navigation.push('AddProductScreen', {type: 'register'});
-  };
-
-  const handlerGetProduct = async () => {
-    try {
-      setSkeleton(true);
-      const response = await geProducts();
-      setProducts(response);
-      setSkeleton(false);
-    } catch (error) {
-      setSkeleton(false);
-    }
   };
 
   return (
@@ -71,7 +57,7 @@ export const HomeScreen = ({navigation}: Props) => {
 
         <View style={styles.space2} />
 
-        {skeleton ? (
+        {data.length === 0 ? (
           <Skeleton />
         ) : (
           <ProductList data={filteredProducts} navigation={navigation} />

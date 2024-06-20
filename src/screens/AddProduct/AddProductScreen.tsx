@@ -17,16 +17,18 @@ import {RootStackParams} from '@/routes/params.stack';
 
 import {Button, Header, Input} from '@/components/components';
 import Loader from '@/components/shared/Loader/Loader';
-import {addProduct, updateProduct} from '@/services/product';
 import {IProduct} from '@/types/app';
 import styles from './styles';
 import {parsedate} from '@/utils';
+import {useData} from '@/context/DataContext';
 
 interface Props extends StackScreenProps<RootStackParams, 'AddProductScreen'> {}
 
 export const AddProductScreen = ({navigation, route}: Props) => {
   const {type, product} = route.params;
   const [showLoader, setShowLoader] = useState<boolean>(false);
+
+  const {addData, updateData} = useData();
 
   const initialValues: IProduct = {
     id: type === 'register' ? '' : product?.id ?? '',
@@ -95,12 +97,12 @@ export const AddProductScreen = ({navigation, route}: Props) => {
   const handlerTypeApi = async (data: IProduct) => {
     try {
       if (type === 'register') {
-        await addProduct(data);
+        await addData(data);
         navigation.pop();
       }
 
       if (type === 'update') {
-        await updateProduct(data, product?.id ?? '');
+        await updateData(product?.id ?? '', data);
         navigation.replace('HomeScreen');
       }
     } catch (error) {

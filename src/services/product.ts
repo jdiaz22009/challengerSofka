@@ -30,7 +30,7 @@ export const updateProduct = async (data: IProduct, id: string) => {
   }
 };
 
-export const geProducts = async (): Promise<IProduct[]> => {
+export const getProducts = async (): Promise<IProduct[]> => {
   const headers = {
     authorId: '122',
     'Content-Type': 'application/json',
